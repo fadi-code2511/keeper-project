@@ -12,21 +12,33 @@ import { useState } from "react";
 
 function App() {
   const [items, setItem] = useState([]);
-  function addItem(noteText) {
-    
+  function addItem(note) {
     setItem((prevValue) => {
       console.log(items);
-      // event.preventDefault();
-      return [...prevValue, noteText];
+      return [...prevValue, note];
     });
-    // event.preventDefault();
+  }
+  function deleteMethod(id) {
+    setItem((prevValue) => {
+      return prevValue.filter((deletedItem, index) => {
+        return index != id;
+      });
+    });
   }
   return (
     <div>
       <Header />
       <CreateArea onAdd={addItem} />
       {items.map((itemText, index) => {
-        return <Note key={index} title={itemText.title} content={itemText.content} />;
+        return (
+          <Note
+            onDelete={deleteMethod}
+            key={index}
+            id={index}
+            title={itemText.title}
+            content={itemText.content}
+          />
+        );
       })}
 
       <Footer />
