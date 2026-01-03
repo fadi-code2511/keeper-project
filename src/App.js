@@ -13,18 +13,20 @@ import { useState } from "react";
 function App() {
   const [items, setItem] = useState([]);
   function addItem(noteText) {
+    
     setItem((prevValue) => {
       console.log(items);
       // event.preventDefault();
       return [...prevValue, noteText];
     });
+    // event.preventDefault();
   }
   return (
     <div>
       <Header />
       <CreateArea onAdd={addItem} />
       {items.map((itemText, index) => {
-        return <Note key={index} title="Note title" content={itemText} />;
+        return <Note key={index} title={itemText.title} content={itemText.content} />;
       })}
 
       <Footer />
